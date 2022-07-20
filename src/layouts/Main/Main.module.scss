@@ -1,0 +1,39 @@
+@import "../../components/GlobalStyles/MediaQueries.scss";
+@import "../../components/GlobalStyles/Colors.scss";
+
+.dashboard {
+    display: flex;
+    width: 84.375%;
+    padding: 16px;
+    overflow-y: overlay;
+    height: 100%;
+    margin-right: 0;
+    background-color: var(--cool-gray-050);
+
+    @include mobile {
+        width: 100%;
+        height: 100%;
+    }
+
+    @include tablet {
+        width: 100%;
+        height: 100%;
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 1660px;
+
+        @include mobile {
+            height: 2180px;
+        }
+
+        @include tablet {
+            height: 2180px;
+        }
+    }
+}

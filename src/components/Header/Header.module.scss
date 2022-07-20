@@ -1,0 +1,53 @@
+@import "../GlobalStyles/Colors.scss";
+@import "../GlobalStyles/MediaQueries.scss";
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 16px 0;
+    width: calc(100% - 32px);
+    height: 60px;
+
+    h1 {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 150%;
+        color: var(--cool-gray-900);
+    }
+
+    &-actions {
+        display: flex;
+        flex-direction: row;
+        height: calc(100% - 20px);
+
+        &-save__button {
+            height: 100%;
+            border-radius: 8px;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            width: 80px;
+            background-color: var(--blue-600);
+            color: #fff;
+
+        }
+
+        &-back__button {
+            height: 100%;
+            border-radius: 8px;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            width: 90px;
+            background-color: #fff;
+            color: var(--cool-gray-700);
+
+            a {
+                text-decoration: none;
+            }
+        }
+
+    }
+}

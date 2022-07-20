@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import styles from "./components/GlobalStyles/GlobalStyles.scss";
+import Navbar from "./layouts/Navbar/Navbar";
+import Sidebar from "./layouts/Sidebar/Sidebar";
+import Main from "./layouts/Main/Main";
+
+import classNames from "classnames/bind";
+
+const cx = classNames.bind(styles);
+// import "rsuite/dist/styles/rsuite-default.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar></Navbar>
+      <div className={cx("homepage")}>
+        <Sidebar></Sidebar>
+        <Main></Main>
+      </div>
     </div>
   );
 }

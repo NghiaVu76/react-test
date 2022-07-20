@@ -1,0 +1,64 @@
+@import "normalize.css";
+@import "./MediaQueries.scss";
+@import "./Colors.scss";
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nunito+Sans:wght@200;300;400;600;700&display=swap");
+
+:root {
+    --font-family: "Inter", sans-serif;
+    @import "./MediaQueries.scss";
+    @import "./Colors.scss";
+}
+
+* {
+    font-family: var(--font-family);
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: overlay;
+    margin: 0;
+    padding: 0;
+
+}
+
+.homepage {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    top: 71px;
+    height: calc(100vh - 71px);
+    left: 0;
+
+    @include mobile {
+        height: 100vh;
+    }
+
+    @include tablet {
+        height: calc(100vh - 71px);
+    }
+}
+
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 8px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
