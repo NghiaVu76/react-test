@@ -1,5 +1,5 @@
-@import "../GlobalStyles/Colors.scss";
-@import "../GlobalStyles/MediaQueries.scss";
+@import "../../GlobalStyles/Colors.scss";
+@import "../../GlobalStyles/MediaQueries.scss";
 
 .header {
     display: flex;
@@ -29,8 +29,8 @@
             padding: 0;
             cursor: pointer;
             width: 80px;
-            background-color: var(--blue-600);
-            color: #fff;
+            background-color: var(--blue-600) !important;
+            color: #fff !important;
 
         }
 
@@ -41,8 +41,8 @@
             padding: 0;
             cursor: pointer;
             width: 90px;
-            background-color: #fff;
-            color: var(--cool-gray-700);
+            background-color: #fff !important;
+            color: var(--cool-gray-700) !important;
 
             a {
                 text-decoration: none;

@@ -1,0 +1,19 @@
+@import "../../GlobalStyles/Colors.scss";
+@import "../../GlobalStyles/MediaQueries.scss";
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 16px 0;
+    width: calc(100% - 32px);
+    height: 60px;
+
+    h1 {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 150%;
+        color: var(--cool-gray-900);
+    }
+}

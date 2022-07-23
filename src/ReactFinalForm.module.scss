@@ -1,0 +1,17 @@
+.row {
+    width: 700px;
+    border: 1px solid var(--cool-gray-100);
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    padding: 50px;
+}
+
+.sauces-checkbox-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+:global .rs-row {
+    padding: 50px;
+}

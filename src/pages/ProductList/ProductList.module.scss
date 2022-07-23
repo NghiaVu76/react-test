@@ -6,7 +6,7 @@
     justify-content: space-between;
 }
 
-.add-products {
+.product-list {
     width: 100%;
     height: auto;
     box-shadow: var(--box-shadow);
@@ -28,6 +28,5 @@
     flex-direction: column;
     width: calc(100% - 32px);
     height: auto;
-    margin: 0 16px 16px;
-    padding: 32px 24px;
+    margin: 16px;
 }

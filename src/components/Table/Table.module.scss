@@ -1,0 +1,14 @@
+@import "../GlobalStyles/MediaQueries.scss";
+@import "../GlobalStyles/Colors.scss";
+
+.table {
+    width: 100%;
+    height: auto;
+
+    @include mobile {
+        width: 100%;
+        overflow-x: auto;
+    }
+}
+
+.special-cell {}

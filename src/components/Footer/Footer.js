@@ -1,7 +1,7 @@
 import styles from "./Footer.module.scss";
-// import { socialIcons } from "../../constants";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
+
+import { Icon } from "rsuite";
 
 const cx = classNames.bind(styles);
 
@@ -12,7 +12,12 @@ export default function Footer() {
         <div className={cx("footer-title")}>
           © 2022 VnSolution. All rights reserved.
         </div>
-        <div className="footer-group"></div>
+        <div className={cx("footer-group")}>
+          <Icon icon="facebook" />
+          <Icon icon="twitter" />
+          <Icon icon="instagram" />
+          <Icon icon="github" />
+        </div>
       </div>
     </div>
   );

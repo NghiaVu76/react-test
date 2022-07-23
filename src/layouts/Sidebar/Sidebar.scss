@@ -2,9 +2,6 @@
 @import "../../components/GlobalStyles/MediaQueries.scss";
 
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     padding: 0px;
     width: 15.625%;
     min-width: 125px;
@@ -17,6 +14,13 @@
 
     @include tablet {
         height: 100%;
+    }
+
+    &-wrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     &-top {
@@ -65,21 +69,11 @@
                 }
 
                 &-item {
-                    text-decoration: none;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
                     width: 100%;
-                    height: 63px;
-                    padding: 0 0 0 20px;
                     background-color: #fff;
+                    height: 63px;
                     border: none;
-                    font-family: var(--font-family);
-                    font-weight: 500;
-                    font-size: 14px;
-                    line-height: 150%;
-                    color: var(--cool-gray-900);
-                    transition: all 0.5s ease;
+
 
                     @include tablet {
                         font-size: 10px;
@@ -87,22 +81,32 @@
                         padding-left: 10px;
                     }
 
-                    &:hover {
-                        box-shadow: var(--box-shadow);
-                        color: var(--blue-600);
-                        transform: scale(1.0);
-                        cursor: pointer;
-                    }
-
-                    &:active {
-                        box-shadow: var(--box-shadow);
-                        color: var(--blue-600);
-                    }
 
                     a {
-                        display: flex;
+                        width: 100%;
+                        height: 100%;
+                        display: flex !important;
                         flex-direction: row;
                         align-items: center;
+                        padding-left: 16px !important;
+                        font-family: var(--font-family) !important;
+                        font-weight: 500 !important;
+                        font-size: 14px !important;
+                        line-height: 150% !important;
+                        color: var(--cool-gray-900) !important;
+                        transition: all 0.5s ease !important;
+
+                        &:hover {
+                            box-shadow: var(--box-shadow) !important;
+                            color: var(--blue-600) !important;
+                            transform: scale(1.0) !important;
+                            cursor: pointer;
+                        }
+
+                        &:active {
+                            box-shadow: var(--box-shadow) !important;
+                            color: var(--blue-600) !important;
+                        }
                     }
 
                 }
@@ -136,25 +140,11 @@
                 height: 100%;
                 background-color: #fff;
 
-                @include tablet {
-                    height: calc(100% - 80px);
-                }
-
                 &-item {
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
                     width: 100%;
                     height: 64px;
-                    padding: 0 0 0 20px;
                     border: none;
-                    text-decoration: none;
-                    font-family: var(--font-family);
-                    font-weight: 500;
-                    font-size: 14px;
-                    line-height: 150%;
-                    color: var(--cool-gray-900);
-                    transition: all 0.5s ease;
+
 
                     @include tablet {
                         font-size: 12px;
@@ -163,23 +153,40 @@
                     }
 
                     a {
-                        display: flex;
+                        width: 100%;
+                        height: 100%;
+                        display: flex !important;
                         flex-direction: row;
                         align-items: center;
+                        padding-left: 16px !important;
+                        text-decoration: none;
+                        font-family: var(--font-family) !important;
+                        font-weight: 500 !important;
+                        font-size: 14px !important;
+                        line-height: 150% !important;
+                        color: var(--cool-gray-900) !important;
+                        transition: all 0.5s ease !important;
+
+                        span {
+                            width: 100%;
+                            height: 100%;
+                        }
+
+                        &:hover {
+                            border-radius: 10px !important;
+                            box-shadow: var(--box-shadow) !important;
+                            color: var(--blue-600) !important;
+                            transform: scale(1.1) !important;
+                            cursor: pointer;
+                        }
+
+                        &:active {
+                            box-shadow: var(--box-shadow) !important;
+                            color: var(--blue-600) !important;
+                        }
                     }
 
-                    &:hover {
-                        border-radius: 10px;
-                        box-shadow: var(--box-shadow);
-                        color: var(--blue-600);
-                        transform: scale(1.1);
-                        cursor: pointer;
-                    }
 
-                    &:active {
-                        box-shadow: var(--box-shadow);
-                        color: var(--blue-600);
-                    }
                 }
 
                 &-icon {
@@ -208,17 +215,18 @@
         &-button {
             width: 100%;
             height: 32px;
-            border: none;
-            font-weight: 600;
-            font-size: 12px;
-            line-height: 150%;
-            color: white;
-            background-color: var(--blue-600);
+            border: none !important;
+            font-weight: 600 !important;
+            font-size: 12px !important;
+            line-height: 150% !important;
+            color: white !important;
+            background-color: var(--blue-600) !important;
+            border-radius: 0 !important;
 
             &:hover {
-                background-color: var(--blue-800);
+                background-color: var(--blue-800) !important;
                 cursor: pointer;
-                color: var(--blue-100);
+                color: var(--blue-100) !important;
             }
         }
 
