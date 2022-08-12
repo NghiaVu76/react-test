@@ -3,7 +3,7 @@ import Form from "../../components/Form/Form";
 import Footer from "../../components/Footer/Footer";
 
 import classNames from "classnames/bind";
-import styles from "./AddProducts.module.scss";
+import styles from "./AddProduct.module.scss";
 import { data } from "../../constants";
 console.log("data", data);
 

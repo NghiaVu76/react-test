@@ -1,0 +1,18 @@
+.wrapper {
+    position: relative;
+    height: 100vh;
+    background-image: url(https://i.pinimg.com/originals/7f/f5/aa/7ff5aa2204c532c80dcc425080aeb1be.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label {
+    color: #fff !important;
+}
+
+.form-group {
+    display: flex;
+    justify-content: center;
+}

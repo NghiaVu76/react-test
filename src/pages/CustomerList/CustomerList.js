@@ -4,13 +4,13 @@ import Filter from "../../components/Filter/Filter";
 import TableHeader from "../../components/Header/TableHeader/TableHeader";
 
 import classNames from "classnames/bind";
-import styles from "./ProductList.module.scss";
+import styles from "./CustomerList.module.scss";
 import { useEffect, useState } from "react";
 import useDebounce from "../../hooks/useDebounce";
 // import useDebounce from "../../hooks/useDebounce";
 const cx = classNames.bind(styles);
 
-export default function ProductList() {
+export default function CustomerList() {
   const [productList, setProductList] = useState([]);
 
   const [dataList, setDataList] = useState([]);

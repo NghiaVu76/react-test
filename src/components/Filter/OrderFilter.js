@@ -5,20 +5,17 @@ import PropTypes from "prop-types";
 
 import classNames from "classnames/bind";
 import styles from "./Filter.module.scss";
-import Form from "../Form/Form";
+import FilterForm from "../Form/FilterForm";
+import AddOrderModal from "../Modal/AddOrderModal";
 
 const cx = classNames.bind(styles);
 
-export default function Filter({ data, handleFilter }) {
+export default function OrderFilter(props) {
+  const { data, handleFilter, onAddOrder } = props;
   const [isShow, setShow] = useState(false);
-  const [isShowModal, setShowModal] = useState(false);
 
   const showFilter = () => {
     setShow(!isShow);
-  };
-
-  const addOrder = () => {
-    setShowModal(true);
   };
 
   return (
@@ -35,7 +32,7 @@ export default function Filter({ data, handleFilter }) {
           <ButtonGroup className={cx("filter-header-actions-button-group")}>
             <Button
               className={cx("filter-header-actions-add_btn")}
-              onClick={addOrder}
+              onClick={onAddOrder}
             >
               Thêm mới
             </Button>
@@ -60,13 +57,13 @@ export default function Filter({ data, handleFilter }) {
         </div>
       </div>
       <div className={cx("filter-form")} id="filter">
-        {isShow ? <Form data={data} onSubmit={handleFilter} /> : <></>}
+        {isShow ? <FilterForm data={data} onSubmit={handleFilter} /> : <></>}
       </div>
     </div>
   );
 }
 
-Filter.propTypes = {
+OrderFilter.propTypes = {
   data: PropTypes.object.isRequired,
   handleFilter: PropTypes.func.isRequired,
 };

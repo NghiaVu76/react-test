@@ -16,7 +16,7 @@ import {
 } from "rsuite";
 import classNames from "classnames/bind";
 import { useRef } from "react";
-import { InputPickerField } from "../FinalFormComponents";
+import { InputField, InputPickerField } from "../FinalFormComponents";
 
 const cx = classNames.bind(styles);
 
@@ -25,8 +25,8 @@ const adapt /* ⬅️ this is a HOC */ =
   ({ input, meta: { valid }, ...rest }) =>
     <Component {...input} {...rest} valid={valid} />;
 const AdaptedInput = adapt(Input);
-const AdaptedSelect = adapt(CheckPicker);
-const AdaptedDate = adapt(DatePicker);
+// const AdaptedSelect = adapt(CheckPicker);
+// const AdaptedDate = adapt(DatePicker);
 
 const Error = ({ name }) => (
   <Field name={name} subscription={{ error: true, touched: true }}>
@@ -40,9 +40,9 @@ const Error = ({ name }) => (
   </Field>
 );
 
-const required = (value) => (value ? undefined : "Required");
+// const required = (value) => (value ? undefined : "Required");
 
-export default function Form({ data, onSubmit }) {
+export default function FilterForm({ data, onSubmit }) {
   const sendData = (values) => {
     // console.log("submit");
     onSubmit(values); //gửi values là một object chứa các value của các fields
@@ -53,6 +53,7 @@ export default function Form({ data, onSubmit }) {
   const onReset = () => {
     formRef.current._reactInternals.child.stateNode.reset();
     formRef.current.state.formValue = null;
+    console.log("reset");
   };
 
   return (
@@ -71,12 +72,10 @@ export default function Form({ data, onSubmit }) {
               <FormGroup className={cx("form-group")}>
                 <div className={cx("form-group-field")}>
                   <Field
-                    name="model"
+                    name="productName"
                     component={AdaptedInput}
                     placeholder=" "
-                    validate={required}
                     control
-                    // onChange={handleChange(values)}
                   />
                   <ControlLabel>Tên sản phẩm</ControlLabel>
                   <Error name="model" />
@@ -85,69 +84,29 @@ export default function Form({ data, onSubmit }) {
               <FormGroup className={cx("form-group")}>
                 <div className={cx("form-group-field")}>
                   <Field
-                    name="platform"
+                    name="productId"
                     component={AdaptedInput}
                     placeholder=" "
-                    validate={required}
+                    // validate={required}
                     control
                   />
-                  <ControlLabel>Nền tảng</ControlLabel>
-                  <Error name="platform" />
+                  <ControlLabel>Mã sản phẩm</ControlLabel>
+                  <Error name="productId" />
                 </div>
               </FormGroup>
               <FormGroup className={cx("form-group")}>
                 <div className={cx("form-group-field")}>
                   <Field
                     className={cx("form-group-field-select")}
-                    name="manufacturer"
-                    component={AdaptedSelect}
+                    name="customerName"
+                    component={AdaptedInput}
                     inputClassname="input-picker"
-                    validate={required}
-                    options={data}
-                    control
-                  />
-                  <ControlLabel>Nhà sản xuất</ControlLabel>
-                  <Error name="category" />
-                </div>
-              </FormGroup>
-              <FormGroup className={cx("form-group")}>
-                <div className={cx("form-group-field")}>
-                  <Field
-                    className={cx("form-group-field-select")}
-                    name="serial_number"
-                    component={AdaptedSelect}
-                    validate={required}
-                    options={data}
-                    control
-                  />
-                  <ControlLabel>Số Seri</ControlLabel>
-                  <Error name="status" />
-                </div>
-              </FormGroup>
-              <FormGroup className={cx("form-group")}>
-                <div className={cx("form-group-field")}>
-                  <Field
-                    className={cx("form-group-field-select")}
-                    name="createDate"
-                    component={AdaptedDate}
-                    validate={required}
-                    control
-                  />
-                  <ControlLabel>Ngày tạo</ControlLabel>
-                  <Error name="createDate" />
-                </div>
-              </FormGroup>
-              <FormGroup className={cx("form-group")}>
-                <div className={cx("form-group-field")}>
-                  <Field
-                    name="price"
-                    component={AdaptedInput}
                     placeholder=" "
-                    validate={required}
+                    // validate={required}
                     control
                   />
-                  <ControlLabel>Giá bán</ControlLabel>
-                  <Error name="price" />
+                  <ControlLabel>Tên khách hàng</ControlLabel>
+                  <Error name="customerName" />
                 </div>
               </FormGroup>
             </RsuiteForm>
@@ -172,7 +131,7 @@ export default function Form({ data, onSubmit }) {
   );
 }
 
-Form.propTypes = {
+FilterForm.propTypes = {
   data: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };

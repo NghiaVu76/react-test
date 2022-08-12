@@ -4,7 +4,7 @@ import { render } from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyles from "./components/GlobalStyles/GlobalStyles";
-import { CustomProvider } from "rsuite";
+// import { CustomProvider } from "rsuite";
 
 const root = document.getElementById("root");
 render(

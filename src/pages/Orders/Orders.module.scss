@@ -1,0 +1,38 @@
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.add-products {
+    width: 100%;
+    height: auto;
+    box-shadow: var(--box-shadow);
+    border-radius: 16px;
+    background-color: #fff;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: auto;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 32px);
+    height: auto;
+    margin: 0 16px 16px;
+    padding: 32px 24px;
+}
+
+label {
+    color: #575757 !important;
+    ;
+}

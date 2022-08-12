@@ -1,0 +1,61 @@
+@import "../../components/GlobalStyles/Colors.scss";
+@import "../../components/GlobalStyles/MediaQueries.scss";
+
+.homepage {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    top: 71px;
+    height: calc(100vh - 71px);
+    left: 0;
+
+    @include mobile {
+        height: 100vh;
+    }
+
+    @include tablet {
+        height: calc(100vh - 71px);
+    }
+}
+
+@import "../../components/GlobalStyles/MediaQueries.scss";
+@import "../../components/GlobalStyles/Colors.scss";
+
+.dashboard {
+    display: flex;
+    width: 84.375%;
+    padding: 16px;
+    overflow-y: overlay;
+    height: 100%;
+    margin-right: 0;
+    background-color: var(--cool-gray-050);
+
+    @include mobile {
+        width: 100%;
+        height: 100%;
+    }
+
+    @include tablet {
+        width: 100%;
+        height: 100%;
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 1660px;
+
+        @include mobile {
+            height: 2180px;
+        }
+
+        @include tablet {
+            height: 2180px;
+        }
+    }
+}
