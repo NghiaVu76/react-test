@@ -1,17 +1,17 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Button, Table as RSuiteTable } from "rsuite";
+import { Button, Icon, IconButton, Table as RSuiteTable } from "rsuite";
 
 import styles from "./Table.module.scss";
 import classNames from "classnames/bind";
 import "rsuite/dist/styles/rsuite-default.css";
-import { Link } from "react-router-dom";
-import Filter from "../Filter/Filter";
 
 const cx = classNames.bind(styles);
 const { Column, HeaderCell, Cell, Pagination } = RSuiteTable;
 
-export default function Table({ data }) {
+export default function Table(props) {
+  const { data, onDelete, onUpdate } = props;
+
   const [loading, setLoading] = useState(false);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
@@ -28,12 +28,12 @@ export default function Table({ data }) {
   // });
 
   return (
-    <div>
+    <div className={cx("wrapper")}>
       <RSuiteTable
         data={data || []}
-        onRowClick={(data) => {
-          console.log(data);
-        }}
+        // onRowClick={(data) => {
+        //   console.log(data);
+        // }}
         autoHeight
         wordWrap
         loading={loading}
@@ -48,7 +48,9 @@ export default function Table({ data }) {
 
         <Column width={150} align="center" fixed>
           <HeaderCell>MÃ ĐƠN HÀNG</HeaderCell>
-          <Cell dataKey="orderId" />
+          <Cell dataKey="orderId">
+            {/* {(rowData) => "DH" + (data.indexOf(rowData) + 101)} */}
+          </Cell>
         </Column>
 
         <Column width={200} align="center">
@@ -88,25 +90,29 @@ export default function Table({ data }) {
 
         <Column width={150} align="center">
           <HeaderCell>THÀNH TIỀN</HeaderCell>
+
           <Cell dataKey="totalPrice" />
         </Column>
 
-        {/* <Column width={100} align="center">
+        <Column width={100} align="center" fixed="right">
           <HeaderCell>CHỨC NĂNG</HeaderCell>
           <Cell>
             {(rowData) => {
-              function handleAction() {
-                alert(`id:${rowData.id}`);
-              }
               return (
-                <span>
-                  <Link to="/add_products">Edit</Link>
-                  <Button onClick={handleAction}> Remove </Button>
+                <span className={cx("actions")}>
+                  <IconButton
+                    icon={<Icon icon="pencil" />}
+                    onClick={() => onUpdate(rowData)}
+                  ></IconButton>
+                  <IconButton
+                    icon={<Icon icon="trash2" />}
+                    onClick={() => onDelete(rowData)}
+                  ></IconButton>
                 </span>
               );
             }}
           </Cell>
-        </Column> */}
+        </Column>
       </RSuiteTable>
 
       <div style={{ padding: 20 }}>
@@ -134,4 +140,6 @@ export default function Table({ data }) {
 
 Table.propTypes = {
   data: PropTypes.object.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };

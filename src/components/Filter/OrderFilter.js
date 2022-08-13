@@ -6,7 +6,9 @@ import PropTypes from "prop-types";
 import classNames from "classnames/bind";
 import styles from "./Filter.module.scss";
 import FilterForm from "../Form/FilterForm";
-import AddOrderModal from "../Modal/AddOrderModal";
+// import AddOrderModal from "../Modal/AddOrderModal";
+// import Drawer from "../Drawer/Drawer";
+import DrawerFilter from "../Drawer/Drawer";
 
 const cx = classNames.bind(styles);
 
@@ -14,8 +16,23 @@ export default function OrderFilter(props) {
   const { data, handleFilter, onAddOrder } = props;
   const [isShow, setShow] = useState(false);
 
-  const showFilter = () => {
-    setShow(!isShow);
+  // const showFilter = () => {
+  //   setShow(!isShow);
+  // };
+
+  const [placement, setPlacement] = useState();
+
+  const handleOpen = (key) => {
+    setShow(true);
+    setPlacement(key);
+  };
+
+  const handleFormSubmit = (form) => {
+    form.submit();
+  };
+
+  const onHide = () => {
+    setShow(false);
   };
 
   return (
@@ -36,7 +53,7 @@ export default function OrderFilter(props) {
             >
               Thêm mới
             </Button>
-            {isShow ? (
+            {/* {isShow ? (
               <Button
                 className={cx("filter-header-actions-hide_btn")}
                 id="hide_btn"
@@ -52,13 +69,20 @@ export default function OrderFilter(props) {
               >
                 Bộ lọc
               </Button>
-            )}
+            )} */}
+            <Button
+              className={cx("filter-header-actions-show_btn")}
+              id="show_btn"
+              onClick={() => handleOpen("right")}
+            >
+              Bộ lọc
+            </Button>
           </ButtonGroup>
         </div>
       </div>
-      <div className={cx("filter-form")} id="filter">
-        {isShow ? <FilterForm data={data} onSubmit={handleFilter} /> : <></>}
-      </div>
+      <DrawerFilter placement={placement} show={isShow} onHide={onHide}>
+        <FilterForm data={data} onSubmit={handleFilter} onHide={onHide} />
+      </DrawerFilter>
     </div>
   );
 }
@@ -66,4 +90,5 @@ export default function OrderFilter(props) {
 OrderFilter.propTypes = {
   data: PropTypes.object.isRequired,
   handleFilter: PropTypes.func.isRequired,
+  onAddOrder: PropTypes.func.isRequired,
 };

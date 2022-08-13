@@ -8,6 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navbar.scss";
 
 export default function Navbar() {
+  const user = JSON.parse(localStorage.getItem("token"));
+  console.log(user);
+  const userName = user.firstName + " " + user.lastName;
+
   return (
     <div>
       <div className="navbar">
@@ -28,6 +32,7 @@ export default function Navbar() {
               <FontAwesomeIcon className="navbar-actions-icon" icon={faBell} />
             </div>
             <div className="navbar-user">
+              <span className="user-name">{userName}</span>
               <img
                 src="https://kenh14cdn.com/2019/2/15/8-15502075818842118741287.jpg"
                 alt="ảnh"

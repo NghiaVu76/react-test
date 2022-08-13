@@ -46,12 +46,20 @@ export default function Login(props) {
       //     })
       //   )
       // )
-      // window.location.reload();
 
       .catch(() => {
         setError("Tài khoản hoặc mật khẩu không đúng");
       });
-    localStorage.setItem("token", data.token);
+    window.location.reload();
+    console.log(data);
+    localStorage.setItem(
+      "token",
+      JSON.stringify({
+        token: data.token,
+        firstName: data.firstName,
+        lastName: data.lastName,
+      })
+    );
   };
 
   const onHandleFormSubmit = (form) => {

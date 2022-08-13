@@ -8,11 +8,15 @@ import TableHeader from "../../components/Header/TableHeader/TableHeader";
 import useDebounce from "../../hooks/useDebounce";
 import OrderFilter from "../../components/Filter/OrderFilter";
 import AddOrderModal from "../../components/Modal/AddOrderModal";
+import UpdateOrderModal from "../../components/Modal/UpdateOrderModal";
+import { Alert } from "rsuite";
 
 const cx = classNames.bind(styles);
 
 export default function Orders() {
   const [isShowAddModal, setShowAddModal] = useState(false);
+  const [isShowUpdateModal, setShowUpdateModal] = useState(false);
+  const [rowData, setRowData] = useState({});
 
   var filterCartList = [];
   var orderList = JSON.parse(localStorage.getItem("orderList"));
@@ -20,6 +24,7 @@ export default function Orders() {
 
   const useHandleFilter = (values) => {
     const debouncedValues = useDebounce(values, 1000);
+    console.log(debouncedValues);
     useEffect(() => {
       for (let i = 0; i < orderList.length; i++) {
         if (
@@ -53,46 +58,108 @@ export default function Orders() {
     // console.log(JSON.stringify(values, 0, 2));
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmitAndAddOrder = (values) => {
     console.log("values", values);
     // const debouncedValues = useDebounce(values, 1500);
-    let orderId = values.orderId;
-    let customerName = values.customerName;
-    let phoneNumber = values.phoneNumber;
-    let address = values.address;
-    let productId = values.productId;
-    let productName = values.productName;
-    let quantity = values.quantity;
-    let price = values.price;
-    let totalPrice = values.price * values.quantity;
+    if (values) {
+      let orderId = values.orderId;
+      let customerName = values.customerName;
+      let phoneNumber = values.phoneNumber;
+      let address = values.address;
+      let productId = values.productId;
+      let productName = values.productName;
+      let quantity = values.quantity;
+      let price = values.price;
+      let totalPrice = values.price * values.quantity;
 
-    let order = {
-      orderId,
-      customerName,
-      phoneNumber,
-      address,
-      productId,
-      productName,
-      quantity,
-      price,
-      totalPrice,
-    };
+      let order = {
+        orderId,
+        customerName,
+        phoneNumber,
+        address,
+        productId,
+        productName,
+        quantity,
+        price,
+        totalPrice,
+      };
 
-    console.log("order", order);
+      console.log("order", order);
 
-    orderList.push(order);
+      orderList.push(order);
 
-    localStorage.setItem("orderList", JSON.stringify(orderList));
-    console.log("orderList", orderList);
-    setData(orderList);
+      localStorage.setItem("orderList", JSON.stringify(orderList));
+      console.log("orderList", orderList);
+      setData(orderList);
+      Alert.success("Thêm thành công !");
+    } else {
+      Alert.error("Thêm thất bại !");
+    }
   };
 
   const addOrder = () => {
     setShowAddModal(true);
   };
 
-  const closeAddOrderModal = () => {
+  const closeModal = () => {
     setShowAddModal(false);
+    setShowUpdateModal(false);
+  };
+
+  const onDelete = (rowData) => {
+    console.log("delete");
+    console.log(rowData);
+    for (let i = 0; i < orderList.length; i++) {
+      if (orderList[i].orderId === rowData.orderId) {
+        orderList.splice(i, 1);
+      }
+    }
+    localStorage.setItem("orderList", JSON.stringify(orderList));
+    setData(orderList);
+  };
+
+  const onUpdate = (rowData) => {
+    setShowUpdateModal(true);
+    setRowData(rowData);
+  };
+
+  const handleSubmitAndUpdateOrder = (values) => {
+    console.log(values);
+    if (values) {
+      let orderId = values.orderId;
+      let customerName = values.customerName;
+      let phoneNumber = values.phoneNumber;
+      let address = values.address;
+      let productId = values.productId;
+      let productName = values.productName;
+      let quantity = values.quantity;
+      let price = values.price;
+      let totalPrice = values.price * values.quantity;
+
+      let cart = {
+        orderId,
+        customerName,
+        phoneNumber,
+        address,
+        productId,
+        productName,
+        quantity,
+        price,
+        totalPrice,
+      };
+
+      for (let i = 0; i < orderList.length; i++) {
+        if (orderList[i].orderId === cart.orderId) {
+          orderList.splice(i, 1, cart);
+        }
+      }
+      console.log(orderList);
+      localStorage.setItem("orderList", JSON.stringify(orderList));
+      setData(orderList);
+      Alert.success("Cập nhật thành công !");
+    } else {
+      Alert.error("Cập nhật thất bại !");
+    }
   };
 
   return (
@@ -101,15 +168,32 @@ export default function Orders() {
         <div className={cx("container")}>
           <TableHeader>Đơn hàng</TableHeader>
           <div className={cx("content")}>
-            <OrderFilter onAddOrder={addOrder} handleFilter={useHandleFilter} />
-            <Table data={data} />
+            <OrderFilter
+              onAddOrder={addOrder}
+              handleFilter={useHandleFilter}
+              onHide={closeModal}
+            />
+            <Table
+              data={data || orderList}
+              onDelete={onDelete}
+              onUpdate={onUpdate}
+            />
             {isShowAddModal && (
               <AddOrderModal
                 show={isShowAddModal}
-                onHide={closeAddOrderModal}
-                onSubmit={handleSubmit}
+                onHide={closeModal}
+                onSubmit={handleSubmitAndAddOrder}
                 overflow={true}
               ></AddOrderModal>
+            )}
+            {isShowUpdateModal && (
+              <UpdateOrderModal
+                show={isShowUpdateModal}
+                onHide={closeModal}
+                overflow={true}
+                onSubmit={handleSubmitAndUpdateOrder}
+                rowData={rowData}
+              ></UpdateOrderModal>
             )}
           </div>
         </div>

@@ -7,26 +7,13 @@ import {
   FormGroup,
   ControlLabel,
   HelpBlock,
-  Input,
-  SelectPicker,
-  DatePicker,
   Button,
-  InputPicker,
-  CheckPicker,
+  ButtonGroup,
 } from "rsuite";
 import classNames from "classnames/bind";
-import { useRef } from "react";
 import { InputField, InputPickerField } from "../FinalFormComponents";
 
 const cx = classNames.bind(styles);
-
-const adapt /* ⬅️ this is a HOC */ =
-  (Component) =>
-  ({ input, meta: { valid }, ...rest }) =>
-    <Component {...input} {...rest} valid={valid} />;
-const AdaptedInput = adapt(Input);
-// const AdaptedSelect = adapt(CheckPicker);
-// const AdaptedDate = adapt(DatePicker);
 
 const Error = ({ name }) => (
   <Field name={name} subscription={{ error: true, touched: true }}>
@@ -42,18 +29,15 @@ const Error = ({ name }) => (
 
 // const required = (value) => (value ? undefined : "Required");
 
-export default function FilterForm({ data, onSubmit }) {
+export default function FilterForm(props) {
+  const { data, onSubmit, onHide } = props;
   const sendData = (values) => {
-    // console.log("submit");
+    console.log("submit", values);
     onSubmit(values); //gửi values là một object chứa các value của các fields
   };
 
-  const formRef = useRef();
-
-  const onReset = () => {
-    formRef.current._reactInternals.child.stateNode.reset();
-    formRef.current.state.formValue = null;
-    console.log("reset");
+  const onReset = (form) => {
+    form.reset();
   };
 
   return (
@@ -61,69 +45,83 @@ export default function FilterForm({ data, onSubmit }) {
       <FinalForm
         onSubmit={onSubmit}
         initialValues={{}}
-        render={({ handleSubmit, values }) => (
+        render={({ handleSubmit, values, form }) => (
           <>
+            {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
             <RsuiteForm
               className={cx("form")}
               onSubmit={handleSubmit}
               id="form"
-              ref={formRef}
             >
               <FormGroup className={cx("form-group")}>
                 <div className={cx("form-group-field")}>
+                  <ControlLabel>Tên sản phẩm</ControlLabel>
                   <Field
+                    className={cx("form-group-field-input")}
                     name="productName"
-                    component={AdaptedInput}
+                    component={InputField}
                     placeholder=" "
+                    // onChange=
                     control
                   />
-                  <ControlLabel>Tên sản phẩm</ControlLabel>
                   <Error name="model" />
                 </div>
               </FormGroup>
               <FormGroup className={cx("form-group")}>
                 <div className={cx("form-group-field")}>
+                  <ControlLabel>Mã sản phẩm</ControlLabel>
                   <Field
+                    className={cx("form-group-field-input")}
                     name="productId"
-                    component={AdaptedInput}
+                    component={InputField}
                     placeholder=" "
                     // validate={required}
                     control
                   />
-                  <ControlLabel>Mã sản phẩm</ControlLabel>
                   <Error name="productId" />
                 </div>
               </FormGroup>
               <FormGroup className={cx("form-group")}>
                 <div className={cx("form-group-field")}>
+                  <ControlLabel>Tên khách hàng</ControlLabel>
                   <Field
-                    className={cx("form-group-field-select")}
+                    className={cx("form-group-field-input")}
                     name="customerName"
-                    component={AdaptedInput}
-                    inputClassname="input-picker"
+                    component={InputField}
+                    // inputClassname="input-picker"
                     placeholder=" "
                     // validate={required}
                     control
                   />
-                  <ControlLabel>Tên khách hàng</ControlLabel>
                   <Error name="customerName" />
                 </div>
               </FormGroup>
             </RsuiteForm>
-            <Button
-              className={cx("filter-button")}
-              onClick={sendData(values)}
-              appearance="primary"
-            >
-              Lọc
-            </Button>
-            <Button
-              className={cx("filter-button")}
-              onClick={onReset}
-              appearance="primary"
-            >
-              Làm mới
-            </Button>
+            <ButtonGroup className={cx("button-group")}>
+              <Button
+                className={cx("button")}
+                onClick={sendData(values)}
+                appearance="primary"
+                color="green"
+              >
+                Lọc
+              </Button>
+              <Button
+                className={cx("button")}
+                onClick={() => onReset(form)}
+                appearance="primary"
+              >
+                Làm mới
+              </Button>
+              <Button
+                className={cx("button")}
+                onClick={onHide}
+                appearance="primary"
+                color="red"
+              >
+                Hủy
+              </Button>
+            </ButtonGroup>
           </>
         )}
       />

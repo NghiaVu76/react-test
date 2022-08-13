@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "rsuite";
 import AddOrderForm from "../Form/AddOrderForm/AddOrderForm";
+import UpdateOrderForm from "../Form/AddOrderForm/UpdateOrderForm";
 import "./AddOrderModal.module.scss";
+import PropTypes from "prop-types";
 
-export default function AddOrderModal(props) {
-  const { show, onHide, overflow, onSubmit } = props;
+export default function UpdateOrderModal(props) {
+  const { show, onHide, overflow, onSubmit, rowData } = props;
   const [customerData, setCustomerData] = useState([]);
   // const [data, setData] = useState({});
   const [productList, setProductList] = useState([]);
@@ -42,15 +44,24 @@ export default function AddOrderModal(props) {
   return (
     <Modal show={show} onHide={onHide} overflow={overflow} size="md">
       <Modal.Header>
-        <Modal.Title>THÊM MỚI ĐƠN HÀNG</Modal.Title>
+        <Modal.Title>CẬP NHẬT ĐƠN HÀNG</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <AddOrderForm
+        <UpdateOrderForm
           onSubmit={onSubmit}
           onHide={onHide}
           data={data}
-        ></AddOrderForm>
+          initialValues={rowData}
+        ></UpdateOrderForm>
       </Modal.Body>
     </Modal>
   );
 }
+
+UpdateOrderForm.propTypes = {
+  show: PropTypes.bool.isRequired,
+  overflow: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  rowData: PropTypes.object.isRequired,
+};

@@ -1,6 +1,10 @@
 @import "../GlobalStyles/MediaQueries.scss";
 @import "../GlobalStyles/Colors.scss";
 
+.wrapper {
+    margin-top: 50px;
+}
+
 .table {
     width: 100%;
     height: auto;
@@ -9,6 +13,13 @@
         width: 100%;
         overflow-x: auto;
     }
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .special-cell {}

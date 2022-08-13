@@ -1,7 +1,7 @@
 import styles from "./AddOrderForm.module.scss";
 import PropTypes from "prop-types";
 
-import { Form as FinalForm, Field } from "react-final-form";
+import { Form as FinalForm, Field, useForm } from "react-final-form";
 import {
   Form as RsuiteForm,
   FormGroup,
@@ -18,11 +18,14 @@ const cx = classNames.bind(styles);
 const required = (value) =>
   value ? undefined : "Không được bỏ qua trường này";
 
-export default function AddOrderForm(props) {
-  const { onSubmit, onHide, data } = props;
-  console.log(data);
+export default function UpdateOrderForm(props) {
+  const { onSubmit, onHide, data, initialValues } = props;
+  // console.log("initial", initialValues);
 
   const { customerData, productList } = data;
+
+  // const form = useForm();
+  // const { change } = form;
 
   const onHandleFormSubmit = (form) => {
     form.submit();
@@ -47,7 +50,7 @@ export default function AddOrderForm(props) {
       // console.log("userNameList", listData);
     }
     customerNameList = listData.map((item) => ({ label: item, value: item }));
-    console.log("customerNameList", customerNameList);
+    // console.log("customerNameList", customerNameList);
   };
 
   const getProductList = () => {
@@ -57,7 +60,7 @@ export default function AddOrderForm(props) {
       // console.log("listProductName", listProduct);
     }
     productNameList = listProduct.map((item) => ({ label: item, value: item }));
-    console.log("productNameList", productNameList);
+    // console.log("productNameList", productNameList);
   };
 
   getUserNameData();
@@ -83,10 +86,9 @@ export default function AddOrderForm(props) {
   };
 
   const onChangeProduct = (value, form) => {
-    console.log("onChangeProduct", value);
+    // console.log("onChangeProduct", value);
     for (let i = 0; i < productList.length; i++) {
       if (productList[i].title === value) {
-        console.log(productList[i]);
         productId = productList[i].id;
         quantity = productList[i].stock;
         price = productList[i].price;
@@ -104,7 +106,7 @@ export default function AddOrderForm(props) {
   return (
     <FinalForm
       onSubmit={onSubmit}
-      // initialValues={}
+      initialValues={initialValues}
       render={({ handleSubmit, values, submitting, pristine, form }) => {
         return (
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -121,9 +123,11 @@ export default function AddOrderForm(props) {
                     name="orderId"
                     component={InputField}
                     placeholder=" "
-                    // validate={required}
-                    valueKey="orderId"
+                    validate={required}
+                    // inputValue={initialValues.orderId}
+                    defaultValue={values.orderId}
                     control
+                    disabled
                   />
                 </div>
               </FormGroup>
@@ -151,8 +155,8 @@ export default function AddOrderForm(props) {
                   <Field
                     name="phoneNumber"
                     component={InputField}
-                    value="sss"
                     //   options={data}
+
                     control
                   />
                 </div>
@@ -164,7 +168,7 @@ export default function AddOrderForm(props) {
                   <Field
                     className={cx("form-group-field-select")}
                     name="address"
-                    component={InputPickerField}
+                    component={InputField}
                     control
                   />
                 </div>
@@ -176,7 +180,7 @@ export default function AddOrderForm(props) {
                   <Field
                     name="productId"
                     component={InputPickerField}
-                    placeholder=" "
+                    placeholder="Chọn"
                     // value={values.productId}
                     control
                   />
@@ -204,7 +208,7 @@ export default function AddOrderForm(props) {
                   <Field
                     name="quantity"
                     type="number"
-                    component={InputPickerField}
+                    component={InputField}
                     // value={`${quantity}`}
                     control
                   />
@@ -271,8 +275,9 @@ export default function AddOrderForm(props) {
   );
 }
 
-AddOrderForm.propTypes = {
+UpdateOrderForm.propTypes = {
   data: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onHide: PropTypes.func.isRequired,
+  initialValues: PropTypes.object.isRequired,
 };

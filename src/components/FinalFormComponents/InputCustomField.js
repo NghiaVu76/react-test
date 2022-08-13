@@ -3,7 +3,7 @@ import { Input } from "rsuite";
 import CustomField from "./CustomField";
 
 function InputCustomField(props) {
-  const { inputstyle, inputclassname, value, ...rest } = props;
+  const { inputstyle, inputclassname, value, onChange, ...rest } = props;
 
   return (
     <CustomField
